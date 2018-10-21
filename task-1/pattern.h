@@ -16,7 +16,7 @@ class Observer {};
 template <class T>
 class Pattern {
  public:
-  std::string info() { return std::string("Unsupported template type."); }
+  std::string Info() { return std::string("Unsupported template type."); }
 };
 
 template <>
@@ -24,15 +24,8 @@ class Pattern<Proxy> : public ITennisCenter {
  public:
   Pattern(TennisCenter &tennis_center) : tennis_center_(tennis_center) {}
 
-  void BookTime() override {
-    std::cout << "Proxy is booking time." << std::endl;
-    tennis_center_.BookTime();
-  }
-
-  void GetInfo() override {
-    std::cout << "Proxy is requesting info about the Tennis Center named" << std::endl;
-    tennis_center_.GetInfo();
-  }
+  void BookTime() override;
+  void GetInfo() override;
 
  private:
   TennisCenter tennis_center_;
@@ -43,34 +36,21 @@ class Pattern<Mediator> : public ITennisCentersManager {
  public:
   Pattern(std::vector<ITennisCenter *> tennis_centers_list) : tennis_centers_list_(tennis_centers_list) {}
 
-  void GetInfoAboutNearestCenter() override {
-    std::cout << "Mediator is deciding what tennis center to use." << std::endl;
-    int nearest = GetNearestCenter(tennis_centers_list_.size());
-    tennis_centers_list_[nearest]->GetInfo();
-  }
+  void GetInfoAboutNearestCenter() override;
 
  private:
   std::vector<ITennisCenter *> tennis_centers_list_;
 
-  int GetNearestCenter(int count) {
-    std::mt19937 gen(time(0));
-    std::uniform_int_distribution<int> distribution(0, count - 1);
-    return distribution(gen);
-  }
+  int GetNearestCenter(int count);
 };
 
 template <>
 class Pattern<Observer> : public IPublisher {
  public:
   Pattern() : subscribers_(std::set<ISubscriber *>()) {}
-  void Subscribe(ISubscriber *subscriber) { subscribers_.insert(subscriber); }
-  void Unsubscribe(ISubscriber *subscriber) { subscribers_.erase(subscriber); }
-  void NotifySubscribers() {
-    std::cout << "Observer is sending news to subscribers." << std::endl;
-    for (auto &subscriber : subscribers_) {
-      subscriber->SendNews();
-    }
-  }
+  void Subscribe(ISubscriber *subscriber);
+  void Unsubscribe(ISubscriber *subscriber);
+  void NotifySubscribers();
  private:
   std::set<ISubscriber *> subscribers_;
 };

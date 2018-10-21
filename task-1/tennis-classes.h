@@ -45,7 +45,7 @@ class TennisPlayer : public ISubscriber {
   }
 
   void GetInfoAboutNearestCenter() {
-    std::cout << "Player requested info about nearest tennis center." << std::endl;
+    std::cout << "Player requested Info about nearest tennis center." << std::endl;
     tennis_center_manager_->GetInfoAboutNearestCenter();
   }
 
@@ -69,7 +69,7 @@ class TennisCenter : public ITennisCenter {
   }
 
   void GetInfo() override {
-    std::cout << "Returned info about the Tennis Center named *" << name_ << "*." << std::endl;
+    std::cout << "Returned Info about the Tennis Center named *" << name_ << "*." << std::endl;
   }
 
   void SetNotificationSystem(IPublisher *notification_system) {

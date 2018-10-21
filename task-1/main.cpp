@@ -46,4 +46,7 @@ int main() {
     delete subscriber;
   }
 
+  std::cout << std::endl << "------------  Other type  ---------------" << std::endl;
+  auto other = Pattern<int>();
+  std::cout << other.Info() << std::endl;
 }
