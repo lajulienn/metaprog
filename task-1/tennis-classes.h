@@ -28,7 +28,9 @@ class IPublisher {
   virtual void NotifySubscribers() = 0;
 };
 
-// class A
+/**
+ * Class A
+ */
 class TennisPlayer : public ISubscriber {
  public:
   TennisPlayer(std::string name, ITennisCenter *tennis_center)
@@ -39,19 +41,9 @@ class TennisPlayer : public ISubscriber {
     : name_(name),
       tennis_center_manager_(tennis_center_manager) {}
 
-  void BookTime() {
-    std::cout << "Player requested time booking." << std::endl;
-    favourite_tennis_center_->BookTime();
-  }
-
-  void GetInfoAboutNearestCenter() {
-    std::cout << "Player requested Info about nearest tennis center." << std::endl;
-    tennis_center_manager_->GetInfoAboutNearestCenter();
-  }
-
-  void SendNews() override {
-    std::cout << "Player *" << name_ <<"* received news." << std::endl;
-  }
+  void BookTime();
+  void GetInfoAboutNearestCenter();
+  void SendNews() override;
 
  private:
   ITennisCenter *favourite_tennis_center_;
@@ -59,27 +51,18 @@ class TennisPlayer : public ISubscriber {
   std::string name_;
 };
 
-// class B
+/**
+ * Class B
+ */
 class TennisCenter : public ITennisCenter {
  public:
   TennisCenter(std::string name) : name_(name) {}
 
-  void BookTime() override {
-    std::cout << "Tennis center booked time for Player." << std::endl;
-  }
+  void BookTime() override;
+  void GetInfo() override;
+  void SetNotificationSystem(IPublisher *notification_system);
+  void NotifySubscribers();
 
-  void GetInfo() override {
-    std::cout << "Returned Info about the Tennis Center named *" << name_ << "*." << std::endl;
-  }
-
-  void SetNotificationSystem(IPublisher *notification_system) {
-    notification_system_ = notification_system;
-  }
-
-  void NotifySubscribers() {
-    std::cout << "Tennis center notifies subscribers about some news." << std::endl;
-    notification_system_->NotifySubscribers();
-  }
  private:
   std::string name_;
   IPublisher *notification_system_;
