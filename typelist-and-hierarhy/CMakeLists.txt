@@ -3,4 +3,4 @@ project(typelist)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(typelist main.cpp)
+add_executable(typelist main.cpp typelist.h fibonacci-numbers.h)
