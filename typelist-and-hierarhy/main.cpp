@@ -2,11 +2,14 @@
 
 #include "typelist.h"
 #include "linear-hierarchy.h"
+#include "fibonacci-hierarchy.h"
 
 
 // Main for hierarchy check
 int main() {
   LinearHierarchy<TypeList<int, long, float, double>, Unit> linear;
+
+  FibonacciHierarchy<TypeList<int, long, float, double, int, long, float, double, int, long, float, double>, Unit> fib;
 
   return 0;
 }
