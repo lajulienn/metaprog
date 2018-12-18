@@ -1,14 +1,18 @@
 #include <iostream>
 
 #include "typelist.h"
+#include "linear-hierarchy.h"
 
 
+// Main for hierarchy check
 int main() {
+  LinearHierarchy<TypeList<int, long, float, double>, Unit> linear;
 
   return 0;
 }
 
 /*
+// Main for typelist check
 int main() {
   using ints_and_floats = TypeList<int, long, float, double>;
   using one_int = TypeList<int>;
